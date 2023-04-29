@@ -12,7 +12,7 @@ class Base {
   static get values() {
     return {
       PORT: process.env.PORT ?? 2008,
-      STRIPE_SECRET_KEY: process.env.STRIPE_SECRET_KEY,
+      STRIPE_SECRET_KEY: process.env.STRIPE_SECRET_KEY ?? 'sk_test_4eC39HqLyjWDarjtT1zdp7dc',
     };
   }
 }

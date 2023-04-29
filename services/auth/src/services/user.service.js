@@ -22,7 +22,7 @@ export const getUserByCode = async (code, v = 'v1') => {
 };
 
 export const verifyUser = (verificationCode, v = 'v1') => {
-  return connector.patch(`/api/${v}/users?filter[verification_code]=eq(${verificationCode})`, { is_verified: true, verification_code: null }).then(connector.resolve);
+  return connector.patch(`/api/${v}/users?filter[verification_code]=eq(${verificationCode})`, { is_verified: true }).then(connector.resolve);
 };
 
 export const getUserById = (id, v = 'v1') => {

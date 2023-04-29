@@ -4,7 +4,6 @@ import express from 'express';
 import expressHealth from 'express-health-middleware';
 import compression from 'compression';
 import helmet from 'helmet';
-import cors from 'cors';
 import polyglot from 'node-polyglot';
 import context from 'express-http-context';
 import stack from 'callsite';
@@ -14,7 +13,7 @@ import { correlationId } from '@app/constants';
 import { errorHandler, responseInterceptor } from '@app/middleware';
 import { connect as connectDatabase } from '@app/mongoose';
 
-const initialize = ({ service, routes, leadingMiddleware = [], cors: enableCors, translations, database, config }) => {
+const initialize = ({ service, routes, leadingMiddleware = [], translations, database, config }) => {
   const logger = moduleLogger('Server');
   clusterize(
     () => {
@@ -23,12 +22,8 @@ const initialize = ({ service, routes, leadingMiddleware = [], cors: enableCors,
       app.use(helmet());
       app.use(compression());
 
-      app.use(express.json({ limit: '10mb' }));
+      app.use(express.json({ limit: '100mb' })); // TODO: reduce this later
       app.use(express.urlencoded({ extended: true }));
-
-      if (enableCors) {
-        app.use(cors());
-      }
 
       app.use(context.middleware);
 

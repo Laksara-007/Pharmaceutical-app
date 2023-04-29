@@ -19,6 +19,7 @@ class Base {
       REPORT_SERVICE_BASE_URL: Joi.string().required(),
       SUPPORT_SERVICE_BASE_URL: Joi.string().required(),
       REDIS_CONNECTION_STRING: Joi.string().required(),
+      SERVICE_REQUEST_KEY: Joi.string().optional(),
     };
   }
   static get values() {
