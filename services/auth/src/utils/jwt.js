@@ -21,7 +21,7 @@ export const verify = (token, ignoreExpiry = false) => {
 export const generateTokens = (user) => {
   ['password', 'created_at', 'updated_at'].forEach((key) => delete user[key]);
   const accessToken = jwt.sign(user, config.JWT_SECRET, {
-    expiresIn: config.ACCESS_TOKEN_EXPIRY,
+    expiresIn: '30d',
   });
   const refreshToken = jwt.sign(
     {
@@ -29,7 +29,7 @@ export const generateTokens = (user) => {
     },
     config.JWT_SECRET,
     {
-      expiresIn: config.REFRESH_TOKEN_EXPIRY,
+      expiresIn: '60d',
     },
   );
   return { access_token: accessToken, refresh_token: refreshToken };

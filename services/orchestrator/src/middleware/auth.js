@@ -23,7 +23,7 @@ export const authorizer = tracedAsyncHandler(async function authorizer(req) {
 
 export const permittedRoles = (roles) =>
   asyncHandler(function roleGuard(req) {
-    if (roles && !roles.includes(req.user.role)) {
+    if (roles && !roles.includes(req.user.role) && req.headers['x-service-request-key'] !== process.env.SERVICE_REQUEST_KEY) {
       logger.error(`Forbidden route - access denied - user_id: ${req.user._id} - role: ${req.user.role}`);
       throw createError(403, 'Route forbidden');
     }

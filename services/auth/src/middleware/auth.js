@@ -3,7 +3,7 @@
 import { tracedAsyncHandler } from '@sliit-foss/functions';
 import { whitelistedRoutes } from '@app/constants';
 import { getUserById } from '../services';
-import { Blacklist, verify, errors } from '../utils';
+import { verify, errors } from '../utils';
 
 export const authorizer = tracedAsyncHandler(async function authorizer(req) {
   if (whitelistedRoutes.find((route) => req.path.match(new RegExp(route)))) {
@@ -17,9 +17,6 @@ export const authorizer = tracedAsyncHandler(async function authorizer(req) {
   const user = await getUserById(decodedUser._id);
   if (!user) {
     throw errors.invalid_token;
-  }
-  if (await Blacklist.has(token)) {
-    throw errors.cancelled_token;
   }
   if (!user.is_active) {
     throw errors.user_deactivated;

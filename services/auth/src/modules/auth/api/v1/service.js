@@ -5,7 +5,7 @@ import bcrypt from 'bcryptjs';
 import createError from 'http-errors';
 import { traced } from '@sliit-foss/functions';
 import { createUser, getUserByCode, getUserByEmail, getUserById, sendEmail, updateUserByEmail, verifyUser } from '../../../../services';
-import { errors, verify, generateTokens, Blacklist } from '../../../../utils';
+import { errors, verify, generateTokens } from '../../../../utils';
 import { constructVerificationEmailPayload, constructForgotPasswordEmailPayload } from './mappers';
 
 export const serviceLogin = async ({ email, password }) => {
@@ -60,10 +60,6 @@ export const serviceVerifyUser = async (code) => {
     throw errors.invalid_code;
   }
   return;
-};
-
-export const serviceLogout = (token) => {
-  return Blacklist.add(token);
 };
 
 export const serviceForgotPassword = async (email) => {
