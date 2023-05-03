@@ -17,6 +17,7 @@ class Base {
       REVIEW_SERVICE_BASE_URL: Joi.string().required(),
       ADMIN_SERVICE_BASE_URL: Joi.string().required(),
       REPORT_SERVICE_BASE_URL: Joi.string().required(),
+      SUPPORT_SERVICE_BASE_URL: Joi.string().required(),
       REDIS_CONNECTION_STRING: Joi.string().required(),
       SERVICE_REQUEST_KEY: Joi.string().optional(),
     };
@@ -34,6 +35,7 @@ class Base {
       REVIEW_SERVICE_BASE_URL: process.env.REVIEW_SERVICE_BASE_URL,
       ADMIN_SERVICE_BASE_URL: process.env.ADMIN_SERVICE_BASE_URL,
       REPORT_SERVICE_BASE_URL: process.env.REPORT_SERVICE_BASE_URL,
+      SUPPORT_SERVICE_BASE_URL: process.env.SUPPORT_SERVICE_BASE_URL,
       REDIS_CONNECTION_STRING: process.env.REDIS_CONNECTION_STRING,
     };
   }
